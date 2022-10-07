@@ -8,6 +8,10 @@ const routes = require('./routes/routes')
 // depending on the request type/method and route
 // run some logic inside the app
 const app = express() 
+// must be called before routes(app)
+// app.use(middleware) middleware is function between req and res. app.use - apply it to all routes not app.get/app.post only to particular route
+app.use(express.json()); //any incoming request which is in json will be parsed into an object, so can access request.body
+app.use(express.urlencoded({ extended: true }))
 
 routes(app)
 
