@@ -2,17 +2,13 @@
 // separate this file with index.js
 // nice to not have the server automatically try to listen to an outside port
 const express = require('express')
+const routes = require('./routes/routes')
 
 // create an object that takes http requests
 // depending on the request type/method and route
 // run some logic inside the app
 const app = express() 
 
-// watch for incoming requests of method GET
-// to the route http://localhost:5000/api
-// run the callback function
-app.get('/api', (req, res) => {
-    res.send({ hi: 'there'})
-})
+routes(app)
 
 module.exports = app

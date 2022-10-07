@@ -7,7 +7,18 @@ describe('The express app', () => {
         request(app) // supertest syntax
           .get('/api')
           .end((err, response) => {
-            console.log(response)
+            //console.log(response)
+            assert(response.body.hi === 'there')
+            done()
           })
     })
+    /* use async await
+    it('handles a GET request to /api', async () => {
+    const response = await request(app)
+    or const response = await axios.get('api');
+      .get('/api')
+      .expect(200);
+      
+    assert(response.body.hi === 'there');
+    }); */
 })
