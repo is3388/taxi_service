@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec \"mocha --recursive -R min --timeout 5000\""
+    "test": "set NODE_ENV=test&& nodemon --exec \"mocha --recursive -R min --timeout 5000\""
   },
   "keywords": [],
   "author": "",

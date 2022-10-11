@@ -11,7 +11,7 @@ describe('Drivers controller', () => {
          .then((count) => {
             request(app)
             .post('/api/drivers')
-            .send({email: 'jsmith@test.com'})
+            .send({email: 'asmith@test.com'})
             .end(() => {
                 Driver.count().then(newCount => {
                 assert(count + 1 === newCount)

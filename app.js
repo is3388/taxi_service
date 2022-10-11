@@ -5,7 +5,9 @@ const express = require('express')
 const routes = require('./routes/routes')
 const mongoose = require('mongoose')
 
+if (process.env.NODE_ENV !== 'test') {
 mongoose.connect('mongodb://127.0.0.1:27017/taxi_service')
+}
 
 // create an object that takes http requests
 // depending on the request type/method and route
