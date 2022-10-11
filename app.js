@@ -20,4 +20,9 @@ app.use(express.urlencoded({ extended: true }))
 
 routes(app)
 
+//define a custom middleware
+app.use((err, req, res, next) => {
+    res.status(422).send({ error: err._message })
+})
+
 module.exports = app
