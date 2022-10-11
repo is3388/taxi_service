@@ -53,14 +53,20 @@ describe('Drivers controller', () => {
         const driver = new Driver({email: 'adam@test.com'})
         driver.save()
           .then(() => {
+            Driver.findById(driver._id)
+            .then(driver => {
+            assert(driver.email === 'adam@test.com')
             request(app)
             .delete(`/api/drivers/${driver._id}`)
             .end(() => {
                 Driver.findOne({email: 'adam@test.com'})
                 .then((driver) => {
-                    assert(driver === null)
+                    assert(driver === null) // should not equal to {} empty object
                     done()
+                .catch(next)
                 })
+                
+            })
             })
           })
     })
