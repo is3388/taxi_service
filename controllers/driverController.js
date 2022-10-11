@@ -20,6 +20,13 @@ const edit = (req, res, next) => {
     .catch(next)
 }
 
-module.exports =  { greeting, create, edit }
+const deleteDriver = (req, res, next) => {
+  const id = req.params.id
+  Driver.findByIdAndDelete({_id: id})
+    .then((driver) => res.status(204).send(driver))
+    .catch(next)
+}
+
+module.exports =  { greeting, create, edit, deleteDriver }
 
 
