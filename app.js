@@ -3,6 +3,9 @@
 // nice to not have the server automatically try to listen to an outside port
 const express = require('express')
 const routes = require('./routes/routes')
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://127.0.0.1:27017/taxi_service')
 
 // create an object that takes http requests
 // depending on the request type/method and route
