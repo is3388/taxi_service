@@ -4,7 +4,7 @@ const DriverSchema = mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        require: true,
+        require: [true, 'Email is required'],
         trim: true
     },
     driving: {

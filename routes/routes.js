@@ -1,7 +1,7 @@
 // function takes app
 
 const app = require('../app')
-const {greeting, create} = require('../controllers/driverController')
+const {greeting, create, edit} = require('../controllers/driverController')
 
 module.exports = (app) => {
 // watch for incoming requests of method GET
@@ -9,6 +9,7 @@ module.exports = (app) => {
 // run the callback function
 app.get('/api', greeting)
 app.post('/api/drivers', create)
+app.put('/api/drivers/:id', edit)
 }
 
 

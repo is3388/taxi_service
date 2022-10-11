@@ -12,6 +12,14 @@ const create = (req, res, next) => {
       .catch(next)
     }
 
-module.exports =  { greeting, create }
+const edit = (req, res, next) => {
+  const id = req.params.id
+  const driverProps = req.body
+  Driver.findByIdAndUpdate({_id: id}, driverProps, { new: true })
+    .then(driver => res.status(200).send(driver))
+    .catch(next)
+}
+
+module.exports =  { greeting, create, edit }
 
 
