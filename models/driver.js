@@ -1,5 +1,17 @@
 const mongoose = require('mongoose')
 
+// embedded subdocument for driver location
+const PointSchema = mongoose.Schema({
+    type: {
+        type: String,
+        default: 'Point'
+    },
+    coordinates: { // long and lat (x and y)
+        type: [Number],
+        index: '2dsphere'
+    }
+})
+
 const DriverSchema = mongoose.Schema({
     email: {
         type: String,
@@ -10,7 +22,8 @@ const DriverSchema = mongoose.Schema({
     driving: {
         type: Boolean,
         default: false
-    }
+    },
+    geometry: PointSchema
 }, {
     timestamps: true
 })

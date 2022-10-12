@@ -9,7 +9,7 @@ const create = (req, res, next) => {
     const driverProps = req.body
     Driver.create(driverProps)
       .then(driver => res.send(driver))
-      .catch(next)
+      .catch((err) => next(err))
     }
 
 const edit = (req, res, next) => {
@@ -27,6 +27,40 @@ const deleteDriver = (req, res, next) => {
     .catch(next) // .catch((err) => next(err))
 }
 
-module.exports =  { greeting, create, edit, deleteDriver }
+// get all drivers within 200 kilometers
+/*const index = (req, res, next) => {
+  const {lng, lat} = req.query // lng, lat are string here
+  Driver.find({
+    'geometry.coordinates': {
+        $nearSphere: {
+            $geometry: {
+                type: "Point",
+                coordinates: [lng, lat] // parseFloat(lng)
+            },
+            $maxDistance: 200000
+        }
+    }
+})
+    .then(drivers => res.send(drivers))
+    .catch(next)
+} */
+const index = (req, res, next) => {
+  const { lng, lat } = req.query;
+  Driver.
+      aggregate([{
+          $geoNear: {
+              near: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
+              distanceField: "dist.calculated", // required
+              maxDistance: 200000,
+              spherical: true
+          }
+      }])
+      .then(drivers => {
+          res.send(drivers)
+      })
+      .catch(next);
+ }
+
+module.exports =  { greeting, create, edit, deleteDriver, index }
 
 
